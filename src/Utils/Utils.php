@@ -19,4 +19,9 @@ class Utils {
 
         return $h;
     }
+
+    public static function get($obj, $key, $deff)
+    {
+        return array_key_exists($key , $obj) ? $obj[$key] : $deff;
+    }
 }

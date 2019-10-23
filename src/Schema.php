@@ -14,7 +14,7 @@ class Schema
             'underline' => $this->get_tag('tag', 'u'),
             'strong' => $this->get_tag('tag', 'strong'),
             'code' => $this->get_tag('tag', 'code'),
-            'italic' => $this->get_tag('tag', 'italic'),
+            'italic' => $this->get_tag('tag', 'i'),
             'link' => $this->get_link_styled('a'),
             'styled' => $this->get_link_styled('span'),
         ];
@@ -54,7 +54,7 @@ class Schema
     {
         return function ($node) use ($tag) {
             return [
-                $tag => "h" . $node['attrs']['level']
+                $tag => "h" . $this->getLevel($node)
             ];
         };
     }
@@ -90,10 +90,27 @@ class Schema
                     'pre',
                     [
                         "tag" => "code",
-                        "attrs" => $node['attrs']
+                        "attrs" => $this->getAttrs($node)
                     ]
                 ]
             ];
         };
+    }
+
+    private function getAttrs ($node) 
+    {
+        return Utils::get($node, 'attrs', []);
+    }
+
+    private function getLevel ($node)
+    {
+        if ($node) {
+            if (array_key_exists("attrs", $node)) {
+                $attrs = $node['attrs'];
+                return Utils::get($attrs, 'level', 1);
+            }
+        }
+
+        return 1;
     }
 }
