@@ -53,7 +53,7 @@ class Resolver
 
         $node = $this->getMatchingNode($item);
 
-        if ($node && $node['tag']) {
+        if ($node && array_key_exists('tag', $node)) {
             array_push($html, Render::renderOpeningTag($node['tag']));
         }
 
@@ -64,8 +64,8 @@ class Resolver
             }
         } else if (array_key_exists('text', $item)) {
             array_push($html, Render::escapeHTML($item['text']));
-        } else if ($node && array_key_exists('singleTag', $node)) {
-            array_push($html, Render::renderTag($node['singleTag'], ' /'));
+        } else if ($node && array_key_exists('single_tag', $node)) {
+            array_push($html, Render::renderTag($node['single_tag'], ' /'));
         } else if ($node && array_key_exists('html', $node)) {
             array_push($html, $node['html']);
         }

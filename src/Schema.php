@@ -2,6 +2,8 @@
 
 namespace Storyblok\RichtextRender;
 
+use Storyblok\RichtextRender\Utils\Utils;
+
 class Schema
 {
     public function getMarks()
@@ -26,8 +28,8 @@ class Schema
             'list_item' => $this->get_tag('tag', 'li'),
             'ordered_list' => $this->get_tag('tag', 'ol'),
             'paragraph' => $this->get_tag('tag', 'p'),
-            'horizontal_rule' => $this->get_tag('singleTag', 'hr'),
-            'hard_break' => $this->get_tag('singleTag', 'br'),
+            'horizontal_rule' => $this->get_tag('single_tag', 'hr'),
+            'hard_break' => $this->get_tag('single_tag', 'br'),
             'image' => $this->get_image(),
             'code_block' => $this->get_code_block(),
             'heading' => $this->get_heading('tag'),
@@ -72,8 +74,8 @@ class Schema
             return [
                 "single_tag" => [
                     [
-                        "img",
-                        "attrs" => pick($node['attrs'], ['src', 'alt', 'title'])
+                        "tag" => "img",
+                        "attrs" => Utils::pick($node['attrs'], ['src', 'alt', 'title'])
                     ]
                 ]
             ];
