@@ -1,16 +1,16 @@
 {
-    "name": "ademar/richtext-render-php",
+    "name": "storyblok/richtext-resolver",
     "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "^8"
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit --verbose --bootstrap vendor/autoload.php tests/"
+        "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/"
     },
     "authors": [
         {
-            "name": "teckthor",
-            "email": "ademarjunior@unigranrio.br"
+            "name": "Ademar Cardoso",
+            "email": "ac@storyblok.com"
         }
     ],
     "require": {},
