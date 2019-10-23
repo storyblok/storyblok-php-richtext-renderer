@@ -39,8 +39,10 @@ class Schema
         return function ($node) use ($tagName) {
             return [
                 "tag" => [
-                    "tag" => $tagName,
-                    "attrs" => $node->attrs
+                    [
+                        "tag" => $tagName,
+                        "attrs" => $node['attrs']
+                    ]
                 ]
             ];
         };
@@ -50,7 +52,7 @@ class Schema
     {
         return function ($node) use ($tag) {
             return [
-                $tag => "h" . $node->attrs->level
+                $tag => "h" . $node['attrs']['level']
             ];
         };
     }
@@ -68,8 +70,12 @@ class Schema
     {
         return function ($node) {
             return [
-                "tag" => "img",
-                "attrs" => pick($node->attrs, ['src', 'alt', 'title'])
+                "single_tag" => [
+                    [
+                        "img",
+                        "attrs" => pick($node['attrs'], ['src', 'alt', 'title'])
+                    ]
+                ]
             ];
         };
     }
@@ -78,8 +84,13 @@ class Schema
     {
         return function ($node) {
             return [
-                "tag" => "code",
-                "attrs" => $node->attrs
+                "tag" => [
+                    'pre',
+                    [
+                        "tag" => "code",
+                        "attrs" => $node['attrs']
+                    ]
+                ]
             ];
         };
     }

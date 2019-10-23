@@ -26,7 +26,7 @@ class ResolverTest extends TestCase {
             ]
         ];
 
-        $expected = "<span class='red'>red text</span>";
+        $expected = '<span class="red">red text</span>';
 
         $this->assertEquals($resolver->render((object) $data), $expected);
     }

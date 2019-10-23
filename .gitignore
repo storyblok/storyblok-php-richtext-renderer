@@ -1,2 +1,7 @@
 vendor
 .phpunit.result.cache
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride

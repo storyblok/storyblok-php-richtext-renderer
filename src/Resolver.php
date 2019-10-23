@@ -42,7 +42,7 @@ class Resolver
 
         if (array_key_exists('marks', $item)) {
             $marksArray = $item['marks'];
-            foreach ($marksArray as $key => $m) {
+            foreach ($marksArray as $m) {
                 $mark = $this->getMatchingMark($m);
 
                 if ($mark) {
@@ -52,8 +52,6 @@ class Resolver
         }
 
         $node = $this->getMatchingNode($item);
-
-        var_dump($this->nodes);
 
         if ($node && $node['tag']) {
             array_push($html, Render::renderOpeningTag($node['tag']));
@@ -86,7 +84,7 @@ class Resolver
                 }
             }
         }
-        return join(" ", $html);
+        return join("", $html);
     }
 
     function getMatchingNode($item)
