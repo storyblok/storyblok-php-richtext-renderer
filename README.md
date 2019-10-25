@@ -1,6 +1,6 @@
 # Storyblok PHP Richtext Renderer
 
-The utility class for renderer HTML from Richtext component in Storyblok.
+This package allows you to get an HTML string from the [richtext field](https://www.storyblok.com/docs/richtext-field) of Storyblok.
 
 ### Install dependecies
 
@@ -17,7 +17,8 @@ use Storyblok\RichtextRender\Resolver;
 $resolver = new Resolver();
 
 ```
-And now use the object with render() function...
+
+Use the function `render()` to get the html string from your richtext field.
 
 ```php
 // previous code...
@@ -25,24 +26,28 @@ And now use the object with render() function...
 // Note that in php our objects use multidimensional array notation
 $data = [
   "type" => "doc",
-    "content" => [
-      [
-        "type" => "horizontal_rule"
-      ]
+  "content" => [
+    [
+      "type" => "horizontal_rule"
     ]
-  ];
+  ]
+];
 
-$resolver->render((object) $data) # renders a html string: '<hr />'
+$resolver->render($data) # renders a html string: '<hr />'
 ```
-
 
 ### How to define a custom schema for resolver?
 
-The Richtext class can be receive a single parameter called `Schema`. This parameter must be a dictionary with the two fields, `nodes` and `marks`. This fields can be dictionaries like as `storyblok-php-richtext-renderer/src/Schema.php` file.
+Make a copy of the default schema [storyblok-php-richtext-renderer/src/Schema.php](https://github.com/storyblok/storyblok-php-richtext-renderer/blob/master/src/Schema.php) and add your own schema as parameter to the Richtext class.
+
+```py
+$resolver = new Resolver($my_custom_schema);
+```
 
 #### Testing
 
-We use phpunit module for tests. In terminal, execute:
+We use phpunit for tests. You can execute the following task to run the tests:
+
 ```bash 
 composer run test
 ```
