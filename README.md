@@ -40,7 +40,7 @@ $resolver->render($data) # renders a html string: '<hr />'
 
 Make a copy of the default schema [storyblok-php-richtext-renderer/src/Schema.php](https://github.com/storyblok/storyblok-php-richtext-renderer/blob/master/src/Schema.php) and add your own schema as parameter to the Richtext class.
 
-```py
+```php
 $resolver = new Resolver($my_custom_schema);
 ```
 
