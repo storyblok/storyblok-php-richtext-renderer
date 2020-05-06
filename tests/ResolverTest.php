@@ -390,4 +390,34 @@ class ResolverTest extends TestCase {
 
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
+
+    public function testRenderLinkTagWithAnchor ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "target" => "_blank",
+                                "title" => "Any title",
+                                "anchor" => "anchor-text"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link#anchor-text" target="_blank" title="Any title">link text</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
 }

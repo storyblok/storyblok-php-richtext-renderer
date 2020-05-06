@@ -39,6 +39,12 @@ class Schema
     private function get_link_styled($tagName)
     {
         return function ($node) use ($tagName) {
+            if($node['attrs']['anchor']){
+                $attrs = $node['attrs'];
+                $attrs['href'] = $attrs['href'] . "#" . $attrs['anchor'];
+                unset($attrs['anchor']);
+                $node['attrs'] = $attrs;
+            }
             return [
                 "tag" => [
                     [
