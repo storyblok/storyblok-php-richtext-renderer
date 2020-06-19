@@ -420,4 +420,72 @@ class ResolverTest extends TestCase {
 
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
+
+    public function testRenderLinkTagWithoutAnchor ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "target" => "_blank",
+                                "title" => "Any title",
+                                "anchor" => ""
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
+
+
+    public function testRenderLinkTagWithoutAnchorButWithCssClass ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "target" => "_blank",
+                                "title" => "Any title",
+                                "anchor" => ""
+                            ]
+                        ],
+                        [
+                            "type" => "styled",
+                                "attrs" => [
+                                    "class" => "css__class"
+                                ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link" target="_blank" title="Any title"><span class="css__class">link text</span></a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
 }
