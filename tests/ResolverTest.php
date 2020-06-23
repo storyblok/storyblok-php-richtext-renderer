@@ -488,4 +488,109 @@ class ResolverTest extends TestCase {
 
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
+
+    public function testRenderParagraphWithClassAttribute ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                "type" => "paragraph",
+                "content" => [
+                  [
+                    "text" => "Storyblok visual editor is ",
+                    "type" => "text"
+                  ],
+                  [
+                    "text" => "awesome!",
+                    "type" => "text",
+                    "marks" => [
+                      [
+                        "type" => "styled",
+                        "attrs" => [
+                          "class" => "highlight"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+        ];
+
+        $expected = '<p>Storyblok visual editor is <span class="highlight">awesome!</span></p>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
+
+    public function testRenderParagraphWithThreeClassAttribute ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "type" => "paragraph",
+                    "content" => [
+                        [
+                            "text" => "This is a ",
+                            "type" => "text"
+                        ],
+                        [
+                            "text" => "awesome",
+                            "type" => "text",
+                            "marks" => [
+                                [
+                                    "type" => "styled",
+                                    "attrs" => [
+                                        "class" => "test"
+                                    ]
+                                ]
+                            ]
+                        ],
+                        [
+                            "text" => " text and this ",
+                            "type" => "text"
+                        ],
+                        [
+                            "text" => "renderer",
+                            "type" => "text",
+                            "marks" => [
+                                [
+                                    "type" => "styled",
+                                    "attrs" => [
+                                    "class" => "red"
+                                        ]
+                                ]
+                            ]
+                        ],
+                        [
+                            "text" => " is built with ",
+                            "type" => "text"
+                        ],
+                        [
+                            "text" => "php.",
+                            "type" => "text",
+                            "marks" => [
+                                [
+                                    "type" => "styled",
+                                    "attrs" => [
+                                        "class" => "test__red"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<p>This is a <span class="test">awesome</span> text and this <span class="red">renderer</span> is built with <span class="test__red">php.</span></p>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
 }
