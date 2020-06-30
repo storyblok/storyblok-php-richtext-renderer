@@ -15,8 +15,8 @@ class Schema
             'strong' => $this->get_tag('tag', 'strong'),
             'code' => $this->get_tag('tag', 'code'),
             'italic' => $this->get_tag('tag', 'i'),
-            'link' => $this->get_link_styled('a'),
-            'styled' => $this->get_link_styled('span'),
+            'link' => $this->get_link('a'),
+            'styled' => $this->get_tag_styled('span'),
         ];
     }
 
@@ -36,7 +36,7 @@ class Schema
         ];
     }
 
-    private function get_link_styled($tagName)
+    private function get_link($tagName)
     {
         return function ($node) use ($tagName) {
             if (strlen($node['attrs']['anchor']) == 0 || $node['attrs']['anchor'] == null) {
@@ -77,6 +77,20 @@ class Schema
                 $tag => $tagName
             ];
         };
+    }
+
+    private function get_tag_styled($tagName)
+    {
+       return function ($node) use ($tagName) {
+            return [
+                "tag" => [
+                    [
+                        "tag" => $tagName,
+                        "attrs" => $node['attrs']
+                    ]
+                ]
+            ];
+       };
     }
 
     private function get_image()
