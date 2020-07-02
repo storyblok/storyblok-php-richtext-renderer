@@ -39,7 +39,7 @@ class Schema
     private function get_link($tagName)
     {
         return function ($node) use ($tagName) {
-            if (strlen($node['attrs']['anchor']) == 0 || $node['attrs']['anchor'] == null) {
+            if (!array_key_exists('anchor', $node['attrs']) || $node['attrs']['anchor'] == null) {
                 unset($node['attrs']['anchor']);
             }
 
