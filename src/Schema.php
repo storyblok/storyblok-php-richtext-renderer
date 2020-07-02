@@ -40,7 +40,7 @@ class Schema
     {
         return function ($node) use ($tagName) {
             if (!array_key_exists('anchor', $node['attrs']) || $node['attrs']['anchor'] == null) {
-                unset($node['attrs']['anchor']);
+                return;
             }
 
             if ($node['attrs']['anchor']) {
