@@ -108,6 +108,36 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
+    public function testRenderLinkTagWithEmail ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "an email link",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "email@client.com",
+                                "target" => "_blank",
+                                "linktype" => "email",
+                                "title" => "Any title"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="mailto:email@client.com" target="_blank" linktype="email" title="Any title">an email link</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
     public function testRenderTagWithNullAttribute ()
     {
         $resolver = new Resolver();

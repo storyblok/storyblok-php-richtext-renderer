@@ -40,6 +40,7 @@ class Schema
     {
         return function ($node) use ($tagName) {
             $attrs = $node['attrs'];
+            $linktype = Utils::get($attrs, 'linktype', 'url');
 
             if (array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
@@ -49,6 +50,10 @@ class Schema
                 }
 
                 unset($attrs['anchor']);
+            }
+
+            if ($linktype === 'email') {
+                $attrs['href'] = "mailto:" . $attrs['href'];
             }
 
             return [
