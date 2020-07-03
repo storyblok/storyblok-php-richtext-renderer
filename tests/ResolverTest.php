@@ -108,6 +108,35 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
+    public function testRenderTagWithNullAttribute ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "target" => "_blank",
+                                "title" => null
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link" target="_blank">link text</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
     public function testRenderCodeTag () 
     {
         $resolver = new Resolver();
