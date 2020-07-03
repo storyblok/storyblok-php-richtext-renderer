@@ -43,7 +43,7 @@ class Schema
                 unset($node['attrs']['anchor']);
             }
 
-            if ($node['attrs']['anchor']) {
+            if (array_key_exists('anchor', $node['attrs']) && $node['attrs']['anchor']) {
                 $attrs = $node['attrs'];
                 $attrs['href'] = $attrs['href'] . "#" . $attrs['anchor'];
                 unset($attrs['anchor']);
