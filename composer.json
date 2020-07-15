@@ -5,7 +5,7 @@
         "phpunit/phpunit": "^8"
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/"
+        "test": "./vendor/bin/phpunit -d error_reporting=6143 --bootstrap vendor/autoload.php tests/"
     },
     "authors": [
         {

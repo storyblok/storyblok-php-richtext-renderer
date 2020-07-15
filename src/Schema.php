@@ -39,22 +39,28 @@ class Schema
     private function get_link($tagName)
     {
         return function ($node) use ($tagName) {
-            if (strlen($node['attrs']['anchor']) == 0 || $node['attrs']['anchor'] == null) {
-                unset($node['attrs']['anchor']);
+            $attrs = $node['attrs'];
+            $linktype = Utils::get($attrs, 'linktype', 'url');
+
+            if (array_key_exists('anchor', $attrs)) {
+                $anchor = $attrs['anchor'];
+
+                if (strlen($anchor) !== 0 && !is_null($anchor)) {
+                    $attrs['href'] = $attrs['href'] . "#" . $anchor;
+                }
+
+                unset($attrs['anchor']);
             }
 
-            if ($node['attrs']['anchor']) {
-                $attrs = $node['attrs'];
-                $attrs['href'] = $attrs['href'] . "#" . $attrs['anchor'];
-                unset($attrs['anchor']);
-                $node['attrs'] = $attrs;
+            if ($linktype === 'email') {
+                $attrs['href'] = "mailto:" . $attrs['href'];
             }
 
             return [
                 "tag" => [
                     [
                         "tag" => $tagName,
-                        "attrs" => $node['attrs']
+                        "attrs" => $attrs
                     ]
                 ]
             ];

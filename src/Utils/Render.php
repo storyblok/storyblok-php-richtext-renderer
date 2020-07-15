@@ -45,7 +45,11 @@ class Render
                 $attrs = $tag['attrs'];
 
                 foreach (array_keys($attrs) as $key) {
-                    $h .= " " . $key . '="' . $attrs[$key] . '"';
+                    $value = $attrs[$key];
+
+                    if (!is_null($value)) {
+                        $h .= " " . $key . '="' . $value . '"';
+                    }
                 }
             }
 
