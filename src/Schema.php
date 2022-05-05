@@ -56,6 +56,10 @@ class Schema
                 $attrs['href'] = "mailto:" . $attrs['href'];
             }
 
+            if ($linktype === 'story') {
+                unset($attrs['story'], $attrs['linktype'], $attrs['uuid']);
+            }
+
             return [
                 "tag" => [
                     [

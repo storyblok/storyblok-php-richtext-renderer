@@ -480,6 +480,41 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
+    public function testRenderLinkTagWithStory ()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "uuid" => "0fe06b7d-03d8-4d66-8976-9f7febace056",
+                                "target" => "_self",
+                                "linktype" => "story",
+                                "anchor" => "anchor-text",
+                                "story" => [
+                                    "_uid" => "b94a6a90-1bd4-4ee0-ac14-a09310bd6a45",
+                                    "component" => "page"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link#anchor-text" target="_self">link text</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
     public function testRenderLinkTagWithoutAnchor ()
     {
         $resolver = new Resolver();
