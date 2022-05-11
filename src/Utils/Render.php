@@ -42,11 +42,7 @@ class Render
             $h = "<" . $tag['tag'];
 
             if (array_key_exists('attrs', $tag)) {
-                $attrs = $tag['attrs'];
-
-                foreach (array_keys($attrs) as $key) {
-                    $value = $attrs[$key];
-
+                foreach ($tag['attrs'] as $key => $value) {
                     if (!is_null($value)) {
                         $h .= " " . $key . '="' . $value . '"';
                     }
