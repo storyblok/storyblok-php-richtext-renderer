@@ -22,6 +22,6 @@
         }
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit -d error_reporting=6143 --bootstrap vendor/autoload.php tests/"
+        "test": "./vendor/bin/phpunit"
     }
 }
