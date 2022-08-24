@@ -36,27 +36,27 @@ class Schema
         ];
     }
 
-    private function get_link($tagName)
+    protected function get_link($tagName)
     {
-        return function ($node) use ($tagName) {
+        return static function ($node) use ($tagName) {
             $attrs = $node['attrs'];
-            $linktype = Utils::get($attrs, 'linktype', 'url');
+            $linkType = Utils::get($attrs, 'linktype', 'url');
 
             if (array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
 
-                if (strlen($anchor) !== 0 && !is_null($anchor)) {
-                    $attrs['href'] = $attrs['href'] . "#" . $anchor;
+                if ($anchor !== '' && !is_null($anchor)) {
+                    $attrs['href'] .= "#" . $anchor;
                 }
 
                 unset($attrs['anchor']);
             }
 
-            if ($linktype === 'email') {
+            if ($linkType === 'email') {
                 $attrs['href'] = "mailto:" . $attrs['href'];
             }
 
-            if ($linktype === 'story') {
+            if ($linkType === 'story') {
                 unset($attrs['story'], $attrs['linktype'], $attrs['uuid']);
             }
 
@@ -71,7 +71,7 @@ class Schema
         };
     }
 
-    private function get_heading($tag)
+    protected function get_heading($tag)
     {
         return function ($node) use ($tag) {
             return [
@@ -80,18 +80,18 @@ class Schema
         };
     }
 
-    private function get_tag($tag, $tagName)
+    protected function get_tag($tag, $tagName)
     {
-        return function () use ($tag, $tagName) {
+        return static function () use ($tag, $tagName) {
             return [
                 $tag => $tagName
             ];
         };
     }
 
-    private function get_tag_styled($tagName)
+    protected function get_tag_styled($tagName)
     {
-       return function ($node) use ($tagName) {
+        return static function ($node) use ($tagName) {
             return [
                 "tag" => [
                     [
@@ -100,12 +100,12 @@ class Schema
                     ]
                 ]
             ];
-       };
+        };
     }
 
-    private function get_image()
+    protected function get_image()
     {
-        return function ($node) {
+        return static function ($node) {
             return [
                 "single_tag" => [
                     [
@@ -117,7 +117,7 @@ class Schema
         };
     }
 
-    private function get_code_block()
+    protected function get_code_block()
     {
         return function ($node) {
             return [
@@ -132,18 +132,16 @@ class Schema
         };
     }
 
-    private function getAttrs ($node) 
+    protected function getAttrs($node)
     {
         return Utils::get($node, 'attrs', []);
     }
 
-    private function getLevel ($node)
+    protected function getLevel($node)
     {
-        if ($node) {
-            if (array_key_exists("attrs", $node)) {
-                $attrs = $node['attrs'];
-                return Utils::get($attrs, 'level', 1);
-            }
+        if ($node && array_key_exists("attrs", $node)) {
+            $attrs = $node['attrs'];
+            return Utils::get($attrs, 'level', 1);
         }
 
         return 1;

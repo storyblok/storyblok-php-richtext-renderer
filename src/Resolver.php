@@ -2,22 +2,21 @@
 
 namespace Storyblok\RichtextRender;
 
-use Storyblok\RichtextRender\Schema;
 use Storyblok\RichtextRender\Utils\Render;
 use Storyblok\RichtextRender\Utils\Utils;
 
 class Resolver
 {
-    private $marks = [];
-    private $nodes = [];
+    protected $marks;
+    protected $nodes;
 
-    function __construct($options = [])
+    public function __construct($options = [])
     {
         $_options = (array) $options;
         if (!empty($_options)) {
             $this->marks = Utils::get($_options, 'marks', []);
             $this->nodes = Utils::get($_options, 'nodes', []);
-            return null;
+            return;
         }
 
         $schema = new Schema();
@@ -26,7 +25,7 @@ class Resolver
         $this->nodes = $schema->getNodes();
     }
 
-    function render($data)
+    public function render($data)
     {
         $html = '';
         $data = (array) $data;
@@ -38,7 +37,7 @@ class Resolver
         return $html;
     }
 
-    function renderNode($item)
+    protected function renderNode($item)
     {
         $html = [];
 
@@ -48,7 +47,7 @@ class Resolver
                 $mark = $this->getMatchingMark($m);
 
                 if ($mark) {
-                    array_push($html, Render::renderOpeningTag($mark['tag']));
+                    $html[] = Render::renderOpeningTag($mark['tag']);
                 }
             }
         }
@@ -56,40 +55,40 @@ class Resolver
         $node = $this->getMatchingNode($item);
 
         if ($node && array_key_exists('tag', $node)) {
-            array_push($html, Render::renderOpeningTag($node['tag']));
+            $html[] = Render::renderOpeningTag($node['tag']);
         }
 
         if (array_key_exists('content', $item)) {
             $contentArray = $item['content'];
-            foreach ($contentArray as $key => $content) {
-                array_push($html, $this->renderNode($content));
+            foreach ($contentArray as $content) {
+                $html[] = $this->renderNode($content);
             }
         } else if (array_key_exists('text', $item)) {
-            array_push($html, Render::escapeHTML($item['text']));
+            $html[] = Render::escapeHTML($item['text']);
         } else if ($node && array_key_exists('single_tag', $node)) {
-            array_push($html, Render::renderTag($node['single_tag'], ' /'));
+            $html[] = Render::renderTag($node['single_tag'], ' /');
         } else if ($node && array_key_exists('html', $node)) {
-            array_push($html, $node['html']);
+            $html[] = $node['html'];
         }
 
         if ($node && array_key_exists('tag', $node)) {
-            array_push($html, Render::renderClosingTag($node['tag']));
+            $html[] = Render::renderClosingTag($node['tag']);
         }
 
         if (array_key_exists('marks', $item)) {
             $itemReverse = array_reverse($item['marks']);
-            foreach ($itemReverse as $key => $m) {
+            foreach ($itemReverse as $m) {
                 $mark = $this->getMatchingMark($m);
 
                 if ($mark) {
-                    array_push($html, Render::renderClosingTag($mark['tag']));
+                    $html[] = Render::renderClosingTag($mark['tag']);
                 }
             }
         }
-        return join("", $html);
+        return implode('', $html);
     }
 
-    function getMatchingNode($item)
+    protected function getMatchingNode($item)
     {
         if (array_key_exists($item['type'], $this->nodes)) {
             $fn = $this->nodes[$item['type']];
@@ -102,7 +101,7 @@ class Resolver
         return null;
     }
 
-    function getMatchingMark($item)
+    protected function getMatchingMark($item)
     {
         if (array_key_exists($item['type'], $this->marks)) {
             $fn = $this->marks[$item['type']];
