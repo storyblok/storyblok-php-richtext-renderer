@@ -5,38 +5,39 @@ namespace Storyblok\RichtextRender;
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Render;
 
-class RenderClosingTagTest extends TestCase {
+class RenderClosingTagTest extends TestCase
+{
     public function testRenderClosingWithoutArgument()
     {
-        $this->assertEquals(Render::renderClosingTag(''), '</>');
+        $this->assertEquals('</>', Render::renderClosingTag(''));
     }
 
     public function testRenderClosingParagraph()
     {
-        $this->assertEquals(Render::renderClosingTag('p'), '</p>');
+        $this->assertEquals('</p>', Render::renderClosingTag('p'));
     }
 
     public function testRenderClosingItalic()
     {
-        $this->assertEquals(Render::renderClosingTag('i'), '</i>');
+        $this->assertEquals('</i>', Render::renderClosingTag('i'));
     }
 
     public function testRenderClosingPre()
     {
-        $this->assertEquals(Render::renderClosingTag('pre'), '</pre>');
+        $this->assertEquals('</pre>', Render::renderClosingTag('pre'));
     }
 
     public function testRenderClosingWithListOfObjects()
     {
-        $options = [[ 'tag' => 'p' ], [ 'tag' => 'pre' ]];
+        $options = [['tag' => 'p'], ['tag' => 'pre']];
 
-        $this->assertEquals(Render::renderClosingTag($options), '</pre></p>');
+        $this->assertEquals('</pre></p>', Render::renderClosingTag($options));
     }
 
     public function testRenderClosingWithListOfString()
     {
         $options = ['p', 'pre'];
 
-        $this->assertEquals(Render::renderClosingTag($options), '</pre></p>');
+        $this->assertEquals('</pre></p>', Render::renderClosingTag($options));
     }
 }

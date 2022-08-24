@@ -5,29 +5,30 @@ namespace Storyblok\RichtextRender;
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Render;
 
-class RenderOpeninigTagTest extends TestCase {
+class RenderOpeningTagTest extends TestCase
+{
     public function testRenderOpeningWithoutArgument()
     {
-        $this->assertEquals(Render::renderOpeningTag(''), '<>');
+        $this->assertEquals('<>', Render::renderOpeningTag(''));
     }
 
     public function testRenderOpeningParagraph()
     {
-        $this->assertEquals(Render::renderOpeningTag('p'), '<p>');
+        $this->assertEquals('<p>', Render::renderOpeningTag('p'));
     }
 
     public function testRenderOpeningWithListOfObjects()
     {
-        $options = [[ 'tag' => 'p' ], [ 'tag' => 'pre' ]];
+        $options = [['tag' => 'p'], ['tag' => 'pre']];
 
-        $this->assertEquals(Render::renderOpeningTag($options), '<p><pre>');
+        $this->assertEquals('<p><pre>', Render::renderOpeningTag($options));
     }
 
     public function testRenderOpeningWithListOfStrings()
     {
         $options = ['p', 'pre'];
 
-        $this->assertEquals(Render::renderOpeningTag($options), '<p><pre>');
+        $this->assertEquals('<p><pre>', Render::renderOpeningTag($options));
     }
 
     public function testRenderOpeningWithListOfObjectsWithAttrs()
@@ -39,9 +40,9 @@ class RenderOpeninigTagTest extends TestCase {
                     'class' => 'is-active'
                 ]
             ],
-            [ 'tag' => 'pre' ]
+            ['tag' => 'pre']
         ];
 
-        $this->assertEquals(Render::renderOpeningTag($options), '<p class="is-active"><pre>');
+        $this->assertEquals('<p class="is-active"><pre>', Render::renderOpeningTag($options));
     }
 }

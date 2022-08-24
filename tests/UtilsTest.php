@@ -5,7 +5,8 @@ namespace Storyblok\RichtextRender;
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Utils;
 
-class UtilsTest extends TestCase {
+class UtilsTest extends TestCase
+{
     public function testPickToImage()
     {
         $attrs = [
