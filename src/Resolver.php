@@ -7,11 +7,14 @@ use Storyblok\RichtextRender\Utils\Utils;
 
 class Resolver
 {
+    protected $renderer;
     protected $marks;
     protected $nodes;
 
-    public function __construct($options = [])
+    public function __construct($options = [], Render $renderer=null)
     {
+        $this->renderer = $renderer ?: new Render();
+        
         $_options = (array) $options;
         if (!empty($_options)) {
             $this->marks = Utils::get($_options, 'marks', []);
@@ -47,7 +50,7 @@ class Resolver
                 $mark = $this->getMatchingMark($m);
 
                 if ($mark) {
-                    $html[] = Render::renderOpeningTag($mark['tag']);
+                    $html[] = $this->renderer->renderOpeningTag($mark['tag']);
                 }
             }
         }
@@ -55,7 +58,7 @@ class Resolver
         $node = $this->getMatchingNode($item);
 
         if ($node && array_key_exists('tag', $node)) {
-            $html[] = Render::renderOpeningTag($node['tag']);
+            $html[] = $this->renderer->renderOpeningTag($node['tag']);
         }
 
         if (array_key_exists('content', $item)) {
@@ -64,15 +67,15 @@ class Resolver
                 $html[] = $this->renderNode($content);
             }
         } else if (array_key_exists('text', $item)) {
-            $html[] = Render::escapeHTML($item['text']);
+            $html[] = $this->renderer->escapeHTML($item['text']);
         } else if ($node && array_key_exists('single_tag', $node)) {
-            $html[] = Render::renderTag($node['single_tag'], ' /');
+            $html[] = $this->renderer->renderTag($node['single_tag'], ' /');
         } else if ($node && array_key_exists('html', $node)) {
             $html[] = $node['html'];
         }
 
         if ($node && array_key_exists('tag', $node)) {
-            $html[] = Render::renderClosingTag($node['tag']);
+            $html[] = $this->renderer->renderClosingTag($node['tag']);
         }
 
         if (array_key_exists('marks', $item)) {
@@ -81,7 +84,7 @@ class Resolver
                 $mark = $this->getMatchingMark($m);
 
                 if ($mark) {
-                    $html[] = Render::renderClosingTag($mark['tag']);
+                    $html[] = $this->renderer->renderClosingTag($mark['tag']);
                 }
             }
         }

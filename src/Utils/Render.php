@@ -4,12 +4,12 @@ namespace Storyblok\RichtextRender\Utils;
 
 class Render
 {
-    public static function escapeHTMl($html)
+    public function escapeHTMl($html)
     {
         return htmlspecialchars($html, ENT_QUOTES);
     }
 
-    public static function renderClosingTag($tags)
+    public function renderClosingTag($tags)
     {
         if (is_string($tags)) {
             return "</$tags>";
@@ -28,7 +28,7 @@ class Render
         return implode('', $all);
     }
 
-    public static function renderTag($tags, $ending)
+    public function renderTag($tags, $ending)
     {
         if (is_string($tags)) {
             return "<$tags$ending>";
@@ -55,8 +55,8 @@ class Render
         return implode('', $all);
     }
 
-    public static function renderOpeningTag($tags)
+    public function renderOpeningTag($tags)
     {
-        return self::renderTag($tags, '');
+        return $this->renderTag($tags, '');
     }
 }
