@@ -32,7 +32,7 @@ class ResolverTest extends TestCase
 
         $expected = '<span class="red">red text</span>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderHrTag()
@@ -50,7 +50,7 @@ class ResolverTest extends TestCase
 
         $expected = '<hr />';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderImgTag()
@@ -72,7 +72,7 @@ class ResolverTest extends TestCase
 
         $expected = '<img src="https://asset" alt="Any description" />';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderLinkTag()
@@ -101,7 +101,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderLinkTagWithEmail()
@@ -131,7 +131,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="mailto:email@client.com" target="_blank" linktype="email" title="Any title">an email link</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderTagWithNullAttribute()
@@ -160,7 +160,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank">link text</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderCodeTag()
@@ -181,7 +181,7 @@ class ResolverTest extends TestCase
         ];
         $expected = '<pre><code>code</code></pre>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderHeadingTag()
@@ -203,7 +203,7 @@ class ResolverTest extends TestCase
         ];
         $expected = '<h2>Lorem ipsum</h2>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
 
     }
 
@@ -223,7 +223,7 @@ class ResolverTest extends TestCase
         ];
         $expected = '<h1>Lorem ipsum</h1>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderBulletList()
@@ -266,7 +266,7 @@ class ResolverTest extends TestCase
 
         $expected = '<ul><li><p>Item 1</p></li><li><p>Item 2</p></li><li><p>Item 3</p></li></ul>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderOrderedList()
@@ -309,7 +309,7 @@ class ResolverTest extends TestCase
 
         $expected = '<ol><li><p>Item 1</p></li><li><p>Item 2</p></li><li><p>Item 3</p></li></ol>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderComplexRender()
@@ -376,7 +376,7 @@ class ResolverTest extends TestCase
 
         $expected = '<p>Lorem <strike>ipsum</strike> dolor sit amet, <b>consectetur</b> <u>adipiscing</u> elit. Duis in <code>sodales</code> metus. Sed auctor, tellus in placerat aliquet, arcu neque efficitur libero, non euismod <i>metus</i> orci eu erat</p>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderCustomSchema()
@@ -411,7 +411,7 @@ class ResolverTest extends TestCase
 
         $expected = '<p>some text after <strike>strike text</strike></p>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderCustomSchemaWithoutMarks()
@@ -443,7 +443,7 @@ class ResolverTest extends TestCase
 
         $expected = '<p>some text after strike text</p>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderLinkTagWithAnchor()
@@ -473,7 +473,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link#anchor-text" target="_blank" title="Any title">link text</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderLinkTagWithStory()
@@ -508,7 +508,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link#anchor-text" target="_self">link text</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderLinkTagWithoutAnchor()
@@ -538,7 +538,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
 
@@ -575,7 +575,7 @@ class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title"><span class="css__class">link text</span></a>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testRenderParagraphWithClassAttribute()
@@ -611,7 +611,7 @@ class ResolverTest extends TestCase
 
         $expected = '<p>Storyblok visual editor is <span class="highlight">awesome!</span></p>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
 
@@ -680,7 +680,7 @@ class ResolverTest extends TestCase
 
         $expected = '<p>This is a <span class="test">awesome</span> text and this <span class="red">renderer</span> is built with <span class="test__red">php.</span></p>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     public function testFullText()
@@ -1195,7 +1195,7 @@ class ResolverTest extends TestCase
 
         $expected = '<h1>Heading one</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sem nisi, imperdiet non ultricies at, luctus sit amet nisi.</p><h2>Heading two</h2><p>Aliquam consectetur sem et convallis hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In tincidunt placerat velit vel lobortis.</p><h3>Heading three</h3><p>Suspendisse ultricies urna arcu, id tincidunt nibh posuere ut. Nunc dapibus, tellus sit amet fermentum eleifend, risus augue pretium massa, a imperdiet tortor ante placerat diam.</p><h4>Heading four</h4><p>Fusce non vehicula eros. Duis diam orci, efficitur porta mauris et, porttitor aliquet nisl.</p><h5>Heading five</h5><p>Integer quis euismod nulla. Nam dapibus maximus nisi, in tempor ante consequat ac. Vestibulum rutrum hendrerit ex, ac dapibus dui finibus id. Praesent molestie dictum neque vel lobortis</p><h6>Heading six</h6><p>Proin congue felis faucibus, volutpat lorem non, imperdiet lacus. Curabitur sed mattis tellus. Maecenas at aliquam odio</p><hr /><h1>More examples to another tags</h1><h2>Blockquote</h2><blockquote><p>This is an example of blockquote</p></blockquote><h2>Lists</h2><p>Unordered List:</p><ul><li><p>Item one</p></li><li><p>Item two</p></li></ul><p>Bullet List:</p><ul><li><p>Item one</p></li><li><p>Item two</p></li></ul><p>Ordered List:</p><ol><li><p>Item one</p></li><li><p>Item two</p></li></ol><h2>Formats</h2><p>Lorem <code>ipsum dolor</code> sit amet, consectetur adipiscing elit. <b>Vestibulum</b> sem <i>nisi</i>, imperdiet non ultricies at, luctus sit amet nisi.</p><p><a href="https://vuejs.org">A link to Vue.js website</a></p><p><img alt="This is the Vue.js logo" src="https://vuejs.org/images/logo.png" /></p><h1>this is an example of fence</h1><pre><code params="js">const world = &#039;Hello&#039;</code></pre><h1>nested lists</h1><ul><li><p>list item</p><ul><li><p>internal list item</p></li></ul></li><li><p>another list item</p></li></ul>';
 
-        $this->assertEquals($resolver->render((object)$data), $expected);
+        $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
     private function getTag($tag)

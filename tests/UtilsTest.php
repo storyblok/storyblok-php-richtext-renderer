@@ -18,12 +18,17 @@ class UtilsTest extends TestCase
 
         $allowed = ['src', 'alt', 'title'];
 
-        $result = [
+        $expected = [
             'src' => 'favicon.ico',
             'alt' => 'An favicon',
             'title' => 'An favicon'
         ];
 
-        $this->assertEquals(Utils::pick($attrs, $allowed), $result);
+        $this->assertEquals($expected, Utils::pick($attrs, $allowed));
+    }
+
+    public function testPickEmpty()
+    {
+        $this->assertNull(Utils::pick([], ['src', 'alt', 'title']));
     }
 }
