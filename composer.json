@@ -1,6 +1,9 @@
 {
     "name": "storyblok/richtext-resolver",
+    "type": "library",
     "license": "MIT",
+    "description": "A package allowing you to get an HTML string from the richtext field of Storyblok.",
+    "keywords": ["storyblok", "richtext", "text", "html", "render"],
     "authors": [
         {
             "name": "Ademar Cardoso",
