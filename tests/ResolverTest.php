@@ -1,5 +1,7 @@
 <?php
 
+namespace Storyblok\RichtextRender;
+
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Resolver;
 
@@ -167,7 +169,7 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
-    public function testRenderCodeTag () 
+    public function testRenderCodeTag ()
     {
         $resolver = new Resolver();
 
@@ -188,7 +190,7 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
-    public function testRenderHeadingTag () 
+    public function testRenderHeadingTag ()
     {
         $resolver = new Resolver();
 
@@ -377,13 +379,13 @@ class ResolverTest extends TestCase {
                 ]]
             ]]
         ];
-        
+
         $expected = '<p>Lorem <strike>ipsum</strike> dolor sit amet, <b>consectetur</b> <u>adipiscing</u> elit. Duis in <code>sodales</code> metus. Sed auctor, tellus in placerat aliquet, arcu neque efficitur libero, non euismod <i>metus</i> orci eu erat</p>';
 
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
-    public function testRenderCustomSchema () 
+    public function testRenderCustomSchema ()
     {
         $custom = [
             'nodes' => [
@@ -418,7 +420,7 @@ class ResolverTest extends TestCase {
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
-    public function testRenderCustomSchemaWithoutMarks () 
+    public function testRenderCustomSchemaWithoutMarks ()
     {
         $custom = [
             'nodes' => [
