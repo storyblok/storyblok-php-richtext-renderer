@@ -11,10 +11,11 @@ jobs:
   build:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     strategy:
       matrix:
         php: [ '7.4', '8.0', '8.1' ]
-
     steps:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
