@@ -42,6 +42,11 @@ class Render
             $result = "<{$tag['tag']}";
 
             if (array_key_exists('attrs', $tag)) {
+                if (isset($tag['attrs']['custom']) && is_array($tag['attrs']['custom'])) {
+                    $tag['attrs'] = array_merge($tag['attrs'], $tag['attrs']['custom']);
+                    unset($tag['attrs']['custom']);
+                }
+
                 foreach ($tag['attrs'] as $key => $value) {
                     if (!is_null($value)) {
                         $result .= " $key=\"$value\"";
