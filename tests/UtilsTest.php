@@ -1,9 +1,12 @@
 <?php
 
+namespace Storyblok\RichtextRender;
+
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Utils;
 
-class UtilsTest extends TestCase {
+class UtilsTest extends TestCase
+{
     public function testPickToImage()
     {
         $attrs = [
@@ -15,12 +18,17 @@ class UtilsTest extends TestCase {
 
         $allowed = ['src', 'alt', 'title'];
 
-        $result = [
+        $expected = [
             'src' => 'favicon.ico',
             'alt' => 'An favicon',
             'title' => 'An favicon'
         ];
 
-        $this->assertEquals(Utils::pick($attrs, $allowed), $result);
+        $this->assertEquals($expected, Utils::pick($attrs, $allowed));
+    }
+
+    public function testPickEmpty()
+    {
+        $this->assertNull(Utils::pick([], ['src', 'alt', 'title']));
     }
 }

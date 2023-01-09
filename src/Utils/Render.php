@@ -4,59 +4,59 @@ namespace Storyblok\RichtextRender\Utils;
 
 class Render
 {
-    public static function escapeHTMl($html)
+    public function escapeHTMl($html)
     {
         return htmlspecialchars($html, ENT_QUOTES);
     }
 
-    public static function renderClosingTag($tags)
+    public function renderClosingTag($tags)
     {
-        if (gettype($tags) == "string") {
-            return "</" . $tags . ">";
+        if (is_string($tags)) {
+            return "</$tags>";
         }
 
         $all = [];
 
         foreach (array_reverse($tags) as $tag) {
             if (is_string($tag)) {
-                array_push($all, "</" . $tag . ">");
+                $all[] = "</$tag>";
             } else {
-                array_push($all, "</" . $tag['tag'] . ">");
+                $all[] = "</{$tag['tag']}>";
             }
         }
 
-        return join("", $all);
+        return implode('', $all);
     }
 
-    public static function renderTag($tags, $ending)
+    public function renderTag($tags, $ending)
     {
         if (is_string($tags)) {
-            return "<" . $tags . $ending . ">";
+            return "<$tags$ending>";
         }
 
-        $all = array_map(function ($tag) use ($ending) {
+        $all = array_map(static function ($tag) use ($ending) {
             if (is_string($tag)) {
-                return "<" . $tag . ">";
+                return "<$tag>";
             }
 
-            $h = "<" . $tag['tag'];
+            $result = "<{$tag['tag']}";
 
             if (array_key_exists('attrs', $tag)) {
                 foreach ($tag['attrs'] as $key => $value) {
                     if (!is_null($value)) {
-                        $h .= " " . $key . '="' . $value . '"';
+                        $result .= " $key=\"$value\"";
                     }
                 }
             }
 
-            return $h . $ending . ">";
+            return "$result$ending>";
         }, $tags);
 
-        return join("", $all);
+        return implode('', $all);
     }
 
-    public static function renderOpeningTag($tags)
+    public function renderOpeningTag($tags)
     {
-        return self::renderTag($tags, '');
+        return $this->renderTag($tags, '');
     }
 }

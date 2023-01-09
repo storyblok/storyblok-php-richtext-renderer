@@ -1,12 +1,9 @@
 {
     "name": "storyblok/richtext-resolver",
+    "type": "library",
     "license": "MIT",
-    "require-dev": {
-        "phpunit/phpunit": "^8"
-    },
-    "scripts": {
-        "test": "./vendor/bin/phpunit -d error_reporting=6143 --bootstrap vendor/autoload.php tests/"
-    },
+    "description": "A package allowing you to get an HTML string from the richtext field of Storyblok.",
+    "keywords": ["storyblok", "richtext", "text", "html", "render"],
     "authors": [
         {
             "name": "Ademar Cardoso",
@@ -14,13 +11,20 @@
         }
     ],
     "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    },
     "autoload": {
         "psr-4": {
             "Storyblok\\RichtextRender\\": "src/"
-        },
-        "psr-0": {
-            "Storyblok\\RichtextRender\\": "src/"
-        },
-        "classmap": ["src/"]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Storyblok\\RichtextRender\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
     }
 }
