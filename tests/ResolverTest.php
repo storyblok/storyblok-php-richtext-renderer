@@ -91,6 +91,7 @@ class ResolverTest extends TestCase
                             "attrs" => [
                                 "href" => "/link",
                                 "target" => "_blank",
+                                "linktype" => "link",
                                 "title" => "Any title"
                             ]
                         ]
@@ -161,7 +162,7 @@ class ResolverTest extends TestCase
             ]
         ];
 
-        $expected = '<a href="mailto:email@client.com" target="_blank" linktype="email" title="Any title">an email link</a>';
+        $expected = '<a href="mailto:email@client.com" target="_blank" title="Any title">an email link</a>';
 
         $this->assertEquals($expected, $resolver->render((object)$data));
     }
