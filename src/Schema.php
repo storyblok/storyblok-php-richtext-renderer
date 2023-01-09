@@ -41,6 +41,7 @@ class Schema
         return static function ($node) use ($tagName) {
             $attrs = $node['attrs'];
             $linkType = Utils::get($attrs, 'linktype', 'url');
+            unset($attrs['linktype']);
 
             if (array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
@@ -57,7 +58,7 @@ class Schema
             }
 
             if ($linkType === 'story') {
-                unset($attrs['story'], $attrs['linktype'], $attrs['uuid']);
+                unset($attrs['story'], $attrs['uuid']);
             }
 
             return [
