@@ -30,14 +30,14 @@
     "scripts": {
         "test": "./vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit tests --coverage-html ./coverage/",
-        "format": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --allow-risky=yes --using-cache=no",
-        "cs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --using-cache=no",
+        "codestyle-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --allow-risky=yes --using-cache=no",
+        "codestyle-check": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix --dry-run --using-cache=no",
         "all-check": [
-            "@format",
+            "@codestyle-fix",
             "@test-coverage"
         ],
         "all-check-ci": [
-            "@cs",
+            "@codestyle-check",
             "@test"
         ]
     }

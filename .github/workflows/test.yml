@@ -33,7 +33,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Run PHP CS
-        run: composer run codestyle-ci
+        run: composer run codestyle-check
 
   tests:
     name: Tests
