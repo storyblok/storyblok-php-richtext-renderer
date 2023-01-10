@@ -137,6 +137,36 @@ class ResolverTest extends TestCase
         $this->assertEquals($resolver->render((object) $data), $expected);
     }
 
+    public function testRenderLinkTagWithEmptyCustomAttributesArrayShouldNotCauseErrors()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "doc",
+            "content" => [
+                [
+                    "text" => "link text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "link",
+                            "attrs" => [
+                                "href" => "/link",
+                                "target" => "_blank",
+                                "title" => "Any title",
+                                "custom" => []
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
+
+        $this->assertEquals($resolver->render((object) $data), $expected);
+    }
+
     public function testRenderLinkTagWithEmail()
     {
         $resolver = new Resolver();
