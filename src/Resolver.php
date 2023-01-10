@@ -14,7 +14,7 @@ class Resolver
     public function __construct($options = [], Render $renderer=null)
     {
         $this->renderer = $renderer ?: new Render();
-        
+
         $_options = (array) $options;
         if (!empty($_options)) {
             $this->marks = Utils::get($_options, 'marks', []);
@@ -66,11 +66,11 @@ class Resolver
             foreach ($contentArray as $content) {
                 $html[] = $this->renderNode($content);
             }
-        } else if (array_key_exists('text', $item)) {
+        } elseif (array_key_exists('text', $item)) {
             $html[] = $this->renderer->escapeHTML($item['text']);
-        } else if ($node && array_key_exists('single_tag', $node)) {
+        } elseif ($node && array_key_exists('single_tag', $node)) {
             $html[] = $this->renderer->renderTag($node['single_tag'], ' /');
-        } else if ($node && array_key_exists('html', $node)) {
+        } elseif ($node && array_key_exists('html', $node)) {
             $html[] = $node['html'];
         }
 

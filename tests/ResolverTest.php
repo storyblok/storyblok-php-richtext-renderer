@@ -1,4 +1,6 @@
-<?php /** @noinspection HtmlUnknownAttribute */
+<?php
+
+/** @noinspection HtmlUnknownAttribute */
 
 /** @noinspection HtmlDeprecatedTag */
 
@@ -237,7 +239,6 @@ class ResolverTest extends TestCase
         $expected = '<h2>Lorem ipsum</h2>';
 
         $this->assertEquals($expected, $resolver->render((object)$data));
-
     }
 
     public function testRenderHeadingTagWhithoutLevel()
