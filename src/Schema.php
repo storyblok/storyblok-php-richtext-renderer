@@ -61,6 +61,11 @@ class Schema
                 unset($attrs['story'], $attrs['uuid']);
             }
 
+            if (isset($attrs['custom']) && is_array($attrs['custom'])) {
+                $attrs = array_merge($attrs, $attrs['custom']);
+            }
+            unset($attrs['custom']);
+
             return [
                 'tag' => [
                     [
