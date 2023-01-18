@@ -43,36 +43,36 @@ class Schema
             $linkType = Utils::get($attrs, 'linktype', 'url');
             unset($attrs['linktype']);
 
-            if (array_key_exists('anchor', $attrs)) {
+            if (\array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
 
-                if ($anchor !== '' && !is_null($anchor)) {
-                    $attrs['href'] .= "#" . $anchor;
+                if ('' !== $anchor && null !== $anchor) {
+                    $attrs['href'] .= '#' . $anchor;
                 }
 
                 unset($attrs['anchor']);
             }
 
-            if ($linkType === 'email') {
-                $attrs['href'] = "mailto:" . $attrs['href'];
+            if ('email' === $linkType) {
+                $attrs['href'] = 'mailto:' . $attrs['href'];
             }
 
-            if ($linkType === 'story') {
+            if ('story' === $linkType) {
                 unset($attrs['story'], $attrs['uuid']);
             }
 
-            if (isset($attrs['custom']) && is_array($attrs['custom'])) {
+            if (isset($attrs['custom']) && \is_array($attrs['custom'])) {
                 $attrs = array_merge($attrs, $attrs['custom']);
             }
             unset($attrs['custom']);
 
             return [
-                "tag" => [
+                'tag' => [
                     [
-                        "tag" => $tagName,
-                        "attrs" => $attrs
-                    ]
-                ]
+                        'tag' => $tagName,
+                        'attrs' => $attrs,
+                    ],
+                ],
             ];
         };
     }
@@ -81,7 +81,7 @@ class Schema
     {
         return function ($node) use ($tag) {
             return [
-                $tag => "h" . $this->getLevel($node)
+                $tag => 'h' . $this->getLevel($node),
             ];
         };
     }
@@ -90,7 +90,7 @@ class Schema
     {
         return static function () use ($tag, $tagName) {
             return [
-                $tag => $tagName
+                $tag => $tagName,
             ];
         };
     }
@@ -99,12 +99,12 @@ class Schema
     {
         return static function ($node) use ($tagName) {
             return [
-                "tag" => [
+                'tag' => [
                     [
-                        "tag" => $tagName,
-                        "attrs" => $node['attrs']
-                    ]
-                ]
+                        'tag' => $tagName,
+                        'attrs' => $node['attrs'],
+                    ],
+                ],
             ];
         };
     }
@@ -113,12 +113,12 @@ class Schema
     {
         return static function ($node) {
             return [
-                "single_tag" => [
+                'single_tag' => [
                     [
-                        "tag" => "img",
-                        "attrs" => Utils::pick($node['attrs'], ['src', 'alt', 'title'])
-                    ]
-                ]
+                        'tag' => 'img',
+                        'attrs' => Utils::pick($node['attrs'], ['src', 'alt', 'title']),
+                    ],
+                ],
             ];
         };
     }
@@ -127,13 +127,13 @@ class Schema
     {
         return function ($node) {
             return [
-                "tag" => [
+                'tag' => [
                     'pre',
                     [
-                        "tag" => "code",
-                        "attrs" => $this->getAttrs($node)
-                    ]
-                ]
+                        'tag' => 'code',
+                        'attrs' => $this->getAttrs($node),
+                    ],
+                ],
             ];
         };
     }
@@ -145,8 +145,9 @@ class Schema
 
     protected function getLevel($node)
     {
-        if ($node && array_key_exists("attrs", $node)) {
+        if ($node && \array_key_exists('attrs', $node)) {
             $attrs = $node['attrs'];
+
             return Utils::get($attrs, 'level', 1);
         }
 
