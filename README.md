@@ -67,7 +67,7 @@ $resolver = new Resolver($my_custom_schema);
 
 ## Testing
 
-We use phpunit for tests. You can execute the following task to run the tests:
+We use PHPUnit for tests. You can execute the following composer task to run the tests:
 
 ```bash
 composer run test
@@ -79,6 +79,29 @@ If you want to generate the coverage report you can launch:
 composer run test-coverage
 ```
 You will find the HTML reports in the `coverage/` directory.
+
+
+## Code Style guide
+
+For consistency, we are using [PHP Coding Standards Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer) tool, for checking and fixing the code to follow standards.
+
+For checking the code you can execute:
+
+```
+composer run codestyle-check
+```
+
+If you want to automatically fix the code to follow standards:
+
+```
+composer run codestyle-fix
+```
+
+If you want to execute fix and test coverage:
+```
+composer run all-check
+```
+
 
 ## Contribution
 
