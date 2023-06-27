@@ -64,4 +64,12 @@ class Render
     {
         return $this->renderTag($tags, '');
     }
+
+    public function renderEmoji($item)
+    {
+        if ($item['attrs']['emoji']) {
+			return $item['attrs']['emoji'];
+		}
+        return "</>";
+    }
 }

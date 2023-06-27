@@ -1231,6 +1231,86 @@ class ResolverTest extends TestCase
         $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
+    public function testRenderSubscript()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            "type" => "paragraph",
+            "content" => [
+                [
+                    "text" => "A Subscript text",
+                    "type" => "text",
+                    "marks" => [
+                        [
+                            "type" => "subscript"
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<sub>A Subscript text</sub>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
+    public function testRenderSuperscript()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'paragraph',
+            'content' => [
+                [
+                    'text' => 'A superscript text',
+                    'type' => 'text',
+                    'marks' => [
+                        [
+                            'type' => 'superscript'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<sup>A superscript text</sup>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
+    public function testTextWithEmoji()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Text with an emoji in the end ',
+                            'type' => 'text'
+                        ],
+                        [
+                            'type' => 'emoji',
+                            'attrs' => [
+                                'name' => 'smile',
+                                'emoji' => '😄',
+                                'fallbackImage' => 'https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f604.png'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<p>Text with an emoji in the end <span data-type="emoji" data-name="smile" emoji="😄">😄</span></p>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
     private function getTag($tag)
     {
         return static function () use ($tag) {

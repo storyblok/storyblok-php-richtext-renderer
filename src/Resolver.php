@@ -72,6 +72,8 @@ class Resolver
             $html[] = $this->renderer->renderTag($node['single_tag'], ' /');
         } else if ($node && array_key_exists('html', $node)) {
             $html[] = $node['html'];
+        } else if (array_key_exists('type', $item) && $item['type'] == 'emoji') {
+            $html[] = $this->renderer->renderEmoji($item);
         }
 
         if ($node && array_key_exists('tag', $node)) {
