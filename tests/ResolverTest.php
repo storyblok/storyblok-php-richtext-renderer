@@ -1311,6 +1311,65 @@ class ResolverTest extends TestCase
         $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
+    public function testEmojiWithFallbackImage()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Text with an emoji in the end ',
+                            'type' => 'text'
+                        ],
+                        [
+                            'type' => 'emoji',
+                            'attrs' => [
+                                'name' => 'trollface',
+                                'emoji' => null,
+                                'fallbackImage' => 'https://github.githubassets.com/images/icons/emoji/trollface.png'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<p>Text with an emoji in the end <span data-type="emoji" data-name="trollface"><img src="https://github.githubassets.com/images/icons/emoji/trollface.png" draggable="false" loading="lazy" align="absmiddle" /></span></p>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
+    public function testHighlightColor()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'text' => 'Highlighted text',
+                    'type' => 'text',
+                    'marks' => [
+                        [
+                            'type' => 'highlight',
+                            'attrs' => [
+                                'color' => '#E72929',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<span style="background-color:#E72929;">Highlighted text</span>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
     private function getTag($tag)
     {
         return static function () use ($tag) {

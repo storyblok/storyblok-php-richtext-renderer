@@ -70,6 +70,19 @@ class Render
         if ($item['attrs']['emoji']) {
 			return $item['attrs']['emoji'];
 		}
-        return "</>";
+
+        $emojiImageContainer = [
+            [
+                'tag' => 'img',
+                'attrs' => [
+                    'src' => $item['attrs']['fallbackImage'],
+                    'draggable' => 'false',
+                    'loading' => 'lazy',
+                    'align' => 'absmiddle',
+                ],
+            ],
+        ];
+
+        return $this->renderTag($emojiImageContainer, ' /');
     }
 }

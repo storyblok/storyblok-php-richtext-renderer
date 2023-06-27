@@ -18,7 +18,8 @@ class Schema
             'link' => $this->get_link('a'),
             'styled' => $this->get_tag_styled('span'),
             'subscript' => $this->get_tag('tag', 'sub'),
-            'superscript' => $this->get_tag('tag', 'sup')
+            'superscript' => $this->get_tag('tag', 'sup'),
+            'highlight' => $this->get_highlight_tag()
         ];
     }
 
@@ -159,6 +160,30 @@ class Schema
                 'data-type' => 'emoji',
                 'data-name' => $rawAttrs['name'],
                 'emoji' => $rawAttrs['emoji']
+            ];
+
+            return [
+                'tag' => [
+                    [
+                        'tag' => 'span',
+                        'attrs' => $attrs,
+                    ],
+                ],
+            ];
+        };
+    }
+
+    protected function get_highlight_tag($node = [])
+    {
+        return static function ($node) {
+            if (!isset($node['attrs']['color'])) {
+                return [
+                    'tag' => '',
+                ];
+            }
+
+            $attrs = [
+                'style' => 'background-color:' . $node['attrs']['color'] . ';',
             ];
 
             return [
