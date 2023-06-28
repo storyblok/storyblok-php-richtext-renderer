@@ -1370,6 +1370,99 @@ class ResolverTest extends TestCase
         $this->assertEquals($expected, $resolver->render((object)$data));
     }
 
+    public function testTextWithColor()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'text' => 'Colored text',
+                    'type' => 'text',
+                    'marks' => [
+                        [
+                            'type' => 'textStyle',
+                            'attrs' => [
+                                'color' => '#E72929',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<span style="color:#E72929">Colored text</span>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
+    public function testTextWithAnchor()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Paragraph with anchor in the middle',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'anchor',
+                                    'attrs' => [
+                                        'id' => 'test',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<p><span id="test">Paragraph with anchor in the middle</span></p>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
+
+    public function testWithCustomAttrsInLinks()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'paragraph',
+            'content' => [
+                [
+                    'text' => 'A nice link with custom attr',
+                    'type' => 'text',
+                    'marks' => [
+                        [
+                            'type' => 'link',
+                            'attrs' => [
+                                'href' => 'www.storyblok.com',
+                                'uuid' => '300aeadc-c82d-4529-9484-f3f8f09cf9f5',
+                                'anchor' => null,
+                                'custom' => [
+                                    'rel' => 'nofollow',
+                                    'title' => 'nice test',
+                                ],
+                                'target' => '_blank',
+                                'linktype' => 'url'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $expected = '<a href="www.storyblok.com" uuid="300aeadc-c82d-4529-9484-f3f8f09cf9f5" target="_blank" rel="nofollow" title="nice test">A nice link with custom attr</a>';
+
+        $this->assertEquals($expected, $resolver->render((object)$data));
+    }
     private function getTag($tag)
     {
         return static function () use ($tag) {

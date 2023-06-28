@@ -19,7 +19,9 @@ class Schema
             'styled' => $this->get_tag_styled('span'),
             'subscript' => $this->get_tag('tag', 'sub'),
             'superscript' => $this->get_tag('tag', 'sup'),
-            'highlight' => $this->get_highlight_tag()
+            'highlight' => $this->get_highlight_tag(),
+            'textStyle' => $this->get_colored_text(),
+            'anchor' => $this->get_tag_styled('span'),
         ];
     }
 
@@ -63,6 +65,13 @@ class Schema
 
             if ($linkType === 'story') {
                 unset($attrs['story'], $attrs['uuid']);
+            }
+
+            if (array_key_exists('custom', $attrs)) {
+                foreach ($attrs['custom'] as $key=>$value) {
+                    $attrs[$key] = $value;
+                }
+                unset($attrs['custom']);
             }
 
             return [
@@ -196,4 +205,30 @@ class Schema
             ];
         };
     }
+
+    protected function get_colored_text($node = [])
+    {
+        return static function ($node) {
+            if (!isset($node['attrs']['color'])) {
+                return [
+                    'tag' => '',
+                ];
+            }
+
+            $attrs = [
+                'style' => 'color:' . $node['attrs']['color'],
+            ];
+
+            return [
+                'tag' => [
+                    [
+                        'tag' => 'span',
+                        'attrs' => $attrs,
+                    ],
+                ],
+            ];
+        };
+    }
+
+    
 }
