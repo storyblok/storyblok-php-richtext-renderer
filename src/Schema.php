@@ -184,10 +184,8 @@ class Schema
     protected function get_highlight_tag($node = [])
     {
         return static function ($node) {
-            if (!isset($node['attrs']['color'])) {
-                return [
-                    'tag' => '',
-                ];
+            if (!isset($node['attrs']['color']) || empty($node['attrs']['color'])) {
+                return [];
             }
 
             $attrs = [
@@ -208,10 +206,8 @@ class Schema
     protected function get_colored_text($node = [])
     {
         return static function ($node) {
-            if (!isset($node['attrs']['color'])) {
-                return [
-                    'tag' => '',
-                ];
+            if (!isset($node['attrs']['color']) || empty($node['attrs']['color'])) {
+                return [];
             }
 
             $attrs = [

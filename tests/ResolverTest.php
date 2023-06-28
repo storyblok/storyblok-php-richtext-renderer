@@ -1498,6 +1498,221 @@ final class ResolverTest extends TestCase
         self::assertSame($expected, $resolver->render((object) $data));
     }
 
+    public function testH1WithAnchorInTheMiddleOfText()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'heading',
+                    'attrs' => [
+                        'level' => '1',
+                    ],
+                    'content' => [
+                        [
+                            'text' => 'Title with ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'Anchor',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'anchor',
+                                    'attrs' => [
+                                        'id' => 'test1',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' in the midle',
+                            'type' => 'text',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<h1>Title with <span id="test1">Anchor</span> in the midle</h1>';
+
+        self::assertSame($expected, $resolver->render((object) $data));
+    }
+
+    public function testBoldText()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'text',
+                    'marks' => [
+                        [
+                            'type' => 'bold',
+                        ],
+                    ],
+                    'text' => 'Lorem Ipsum',
+                ],
+            ],
+        ];
+
+        $expected = '<b>Lorem Ipsum</b>';
+
+        self::assertSame($expected, $resolver->render((object) $data));
+    }
+
+    public function testRenderTextWithMissingAttrs()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Text with ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'highlight',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'highlight',
+                                    'attrs' => [
+                                        'color' => '',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' colors. And another text ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'with text',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'textStyle',
+                                    'attrs' => [
+                                        'color' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' color.',
+                            'type' => 'text',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<p>Text with highlight colors. And another text with text color.</p>';
+
+        self::assertSame($expected, $resolver->render((object) $data));
+    }
+
+    public function testRenderTextWithBrokenAttrs()
+    {
+        $resolver = new Resolver();
+
+        $data = [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Text with ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'highlight',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'highlight',
+                                    'attrs' => [
+                                        'color' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' colors. And another text ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'with text',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'textStyle',
+                                    'attrs' => [],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' color.',
+                            'type' => 'text',
+                        ],
+                    ],
+                ],
+                [
+                    'type' => 'paragraph',
+                    'content' => [
+                        [
+                            'text' => 'Text with ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'highlight',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'highlight',
+                                    'attrs' => [
+                                        'color' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' colors. And another text ',
+                            'type' => 'text',
+                        ],
+                        [
+                            'text' => 'with text',
+                            'type' => 'text',
+                            'marks' => [
+                                [
+                                    'type' => 'textStyle',
+                                ],
+                            ],
+                        ],
+                        [
+                            'text' => ' color.',
+                            'type' => 'text',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $expected = '<p>Text with highlight colors. And another text with text color.</p><p>Text with highlight colors. And another text with text color.</p>';
+
+        self::assertSame($expected, $resolver->render((object) $data));
+    }
+
     private function getTag($tag)
     {
         return static function () use ($tag) {

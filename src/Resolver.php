@@ -50,7 +50,7 @@ class Resolver
             foreach ($marksArray as $m) {
                 $mark = $this->getMatchingMark($m);
 
-                if ($mark) {
+                if ($mark && isset($mark['tag'])) {
                     $html[] = $this->renderer->renderOpeningTag($mark['tag']);
                 }
             }
@@ -86,7 +86,7 @@ class Resolver
             foreach ($itemReverse as $m) {
                 $mark = $this->getMatchingMark($m);
 
-                if ($mark) {
+                if ($mark && isset($mark['tag'])) {
                     $html[] = $this->renderer->renderClosingTag($mark['tag']);
                 }
             }
