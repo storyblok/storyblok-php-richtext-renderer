@@ -63,8 +63,8 @@ class Render
     public function renderEmoji($item)
     {
         if ($item['attrs']['emoji']) {
-			return $item['attrs']['emoji'];
-		}
+            return $item['attrs']['emoji'];
+        }
 
         $emojiImageContainer = [
             [

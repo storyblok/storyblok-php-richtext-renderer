@@ -38,7 +38,7 @@ class Schema
             'image' => $this->get_image(),
             'code_block' => $this->get_code_block(),
             'heading' => $this->get_heading('tag'),
-            'emoji' => $this->get_emoji()
+            'emoji' => $this->get_emoji(),
         ];
     }
 
@@ -167,7 +167,7 @@ class Schema
             $attrs = [
                 'data-type' => 'emoji',
                 'data-name' => $rawAttrs['name'],
-                'emoji' => $rawAttrs['emoji']
+                'emoji' => $rawAttrs['emoji'],
             ];
 
             return [
@@ -228,6 +228,4 @@ class Schema
             ];
         };
     }
-
-    
 }

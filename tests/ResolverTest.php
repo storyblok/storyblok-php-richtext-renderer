@@ -39,7 +39,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<span class="red">red text</span>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderHrTag()
@@ -57,7 +57,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<hr />';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderImgTag()
@@ -79,7 +79,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<img src="https://asset" alt="Any description" />';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTag()
@@ -109,7 +109,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTagWithCustomAttributes()
@@ -141,7 +141,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title" rel="alternate">link text</a>';
 
-        static::assertSame($resolver->render((object) $data), $expected);
+        self::assertSame($resolver->render((object) $data), $expected);
     }
 
     public function testRenderLinkTagWithEmptyCustomAttributesArrayShouldNotCauseErrors()
@@ -171,7 +171,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
 
-        static::assertSame($resolver->render((object) $data), $expected);
+        self::assertSame($resolver->render((object) $data), $expected);
     }
 
     public function testRenderLinkTagWithEmail()
@@ -201,7 +201,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="mailto:email@client.com" target="_blank" title="Any title">an email link</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderTagWithNullAttribute()
@@ -230,7 +230,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank">link text</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderCodeTag()
@@ -251,7 +251,7 @@ final class ResolverTest extends TestCase
         ];
         $expected = '<pre><code>code</code></pre>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderHeadingTag()
@@ -273,7 +273,7 @@ final class ResolverTest extends TestCase
         ];
         $expected = '<h2>Lorem ipsum</h2>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderHeadingTagWhithoutLevel()
@@ -292,7 +292,7 @@ final class ResolverTest extends TestCase
         ];
         $expected = '<h1>Lorem ipsum</h1>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderBulletList()
@@ -335,7 +335,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<ul><li><p>Item 1</p></li><li><p>Item 2</p></li><li><p>Item 3</p></li></ul>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderOrderedList()
@@ -378,7 +378,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<ol><li><p>Item 1</p></li><li><p>Item 2</p></li><li><p>Item 3</p></li></ol>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderComplexRender()
@@ -445,7 +445,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p>Lorem <strike>ipsum</strike> dolor sit amet, <b>consectetur</b> <u>adipiscing</u> elit. Duis in <code>sodales</code> metus. Sed auctor, tellus in placerat aliquet, arcu neque efficitur libero, non euismod <i>metus</i> orci eu erat</p>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderCustomSchema()
@@ -480,7 +480,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p>some text after <strike>strike text</strike></p>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderCustomSchemaWithoutMarks()
@@ -512,7 +512,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p>some text after strike text</p>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTagWithAnchor()
@@ -542,7 +542,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link#anchor-text" target="_blank" title="Any title">link text</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTagWithStory()
@@ -577,7 +577,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link#anchor-text" target="_self">link text</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTagWithoutAnchor()
@@ -607,7 +607,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title">link text</a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderLinkTagWithoutAnchorButWithCssClass()
@@ -643,7 +643,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<a href="/link" target="_blank" title="Any title"><span class="css__class">link text</span></a>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderParagraphWithClassAttribute()
@@ -679,7 +679,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p>Storyblok visual editor is <span class="highlight">awesome!</span></p>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderParagraphWithThreeClassAttribute()
@@ -747,7 +747,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p>This is a <span class="test">awesome</span> text and this <span class="red">renderer</span> is built with <span class="test__red">php.</span></p>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testFullText()
@@ -1262,7 +1262,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<h1>Heading one</h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sem nisi, imperdiet non ultricies at, luctus sit amet nisi.</p><h2>Heading two</h2><p>Aliquam consectetur sem et convallis hendrerit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In tincidunt placerat velit vel lobortis.</p><h3>Heading three</h3><p>Suspendisse ultricies urna arcu, id tincidunt nibh posuere ut. Nunc dapibus, tellus sit amet fermentum eleifend, risus augue pretium massa, a imperdiet tortor ante placerat diam.</p><h4>Heading four</h4><p>Fusce non vehicula eros. Duis diam orci, efficitur porta mauris et, porttitor aliquet nisl.</p><h5>Heading five</h5><p>Integer quis euismod nulla. Nam dapibus maximus nisi, in tempor ante consequat ac. Vestibulum rutrum hendrerit ex, ac dapibus dui finibus id. Praesent molestie dictum neque vel lobortis</p><h6>Heading six</h6><p>Proin congue felis faucibus, volutpat lorem non, imperdiet lacus. Curabitur sed mattis tellus. Maecenas at aliquam odio</p><hr /><h1>More examples to another tags</h1><h2>Blockquote</h2><blockquote><p>This is an example of blockquote</p></blockquote><h2>Lists</h2><p>Unordered List:</p><ul><li><p>Item one</p></li><li><p>Item two</p></li></ul><p>Bullet List:</p><ul><li><p>Item one</p></li><li><p>Item two</p></li></ul><p>Ordered List:</p><ol><li><p>Item one</p></li><li><p>Item two</p></li></ol><h2>Formats</h2><p>Lorem <code>ipsum dolor</code> sit amet, consectetur adipiscing elit. <b>Vestibulum</b> sem <i>nisi</i>, imperdiet non ultricies at, luctus sit amet nisi.</p><p><a href="https://vuejs.org">A link to Vue.js website</a></p><p><img alt="This is the Vue.js logo" src="https://vuejs.org/images/logo.png" /></p><h1>this is an example of fence</h1><pre><code params="js">const world = &#039;Hello&#039;</code></pre><h1>nested lists</h1><ul><li><p>list item</p><ul><li><p>internal list item</p></li></ul></li><li><p>another list item</p></li></ul>';
 
-        static::assertSame($expected, $resolver->render((object) $data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderSubscript()
@@ -1270,23 +1270,23 @@ final class ResolverTest extends TestCase
         $resolver = new Resolver();
 
         $data = [
-            "type" => "paragraph",
-            "content" => [
+            'type' => 'paragraph',
+            'content' => [
                 [
-                    "text" => "A Subscript text",
-                    "type" => "text",
-                    "marks" => [
+                    'text' => 'A Subscript text',
+                    'type' => 'text',
+                    'marks' => [
                         [
-                            "type" => "subscript"
-                        ]
-                    ]
-                ]
-            ]
+                            'type' => 'subscript',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $expected = '<sub>A Subscript text</sub>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testRenderSuperscript()
@@ -1301,16 +1301,16 @@ final class ResolverTest extends TestCase
                     'type' => 'text',
                     'marks' => [
                         [
-                            'type' => 'superscript'
-                        ]
-                    ]
-                ]
-            ]
+                            'type' => 'superscript',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $expected = '<sup>A superscript text</sup>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testTextWithEmoji()
@@ -1325,24 +1325,24 @@ final class ResolverTest extends TestCase
                     'content' => [
                         [
                             'text' => 'Text with an emoji in the end ',
-                            'type' => 'text'
+                            'type' => 'text',
                         ],
                         [
                             'type' => 'emoji',
                             'attrs' => [
                                 'name' => 'smile',
                                 'emoji' => '😄',
-                                'fallbackImage' => 'https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f604.png'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'fallbackImage' => 'https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f604.png',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $expected = '<p>Text with an emoji in the end <span data-type="emoji" data-name="smile" emoji="😄">😄</span></p>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testEmojiWithFallbackImage()
@@ -1357,24 +1357,24 @@ final class ResolverTest extends TestCase
                     'content' => [
                         [
                             'text' => 'Text with an emoji in the end ',
-                            'type' => 'text'
+                            'type' => 'text',
                         ],
                         [
                             'type' => 'emoji',
                             'attrs' => [
                                 'name' => 'trollface',
                                 'emoji' => null,
-                                'fallbackImage' => 'https://github.githubassets.com/images/icons/emoji/trollface.png'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'fallbackImage' => 'https://github.githubassets.com/images/icons/emoji/trollface.png',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $expected = '<p>Text with an emoji in the end <span data-type="emoji" data-name="trollface"><img src="https://github.githubassets.com/images/icons/emoji/trollface.png" draggable="false" loading="lazy" align="absmiddle" /></span></p>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testHighlightColor()
@@ -1401,7 +1401,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<span style="background-color:#E72929;">Highlighted text</span>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testTextWithColor()
@@ -1428,7 +1428,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<span style="color:#E72929">Colored text</span>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testTextWithAnchor()
@@ -1460,7 +1460,7 @@ final class ResolverTest extends TestCase
 
         $expected = '<p><span id="test">Paragraph with anchor in the middle</span></p>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
 
     public function testWithCustomAttrsInLinks()
@@ -1485,18 +1485,19 @@ final class ResolverTest extends TestCase
                                     'title' => 'nice test',
                                 ],
                                 'target' => '_blank',
-                                'linktype' => 'url'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'linktype' => 'url',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $expected = '<a href="www.storyblok.com" uuid="300aeadc-c82d-4529-9484-f3f8f09cf9f5" target="_blank" rel="nofollow" title="nice test">A nice link with custom attr</a>';
 
-        $this->assertEquals($expected, $resolver->render((object)$data));
+        self::assertSame($expected, $resolver->render((object) $data));
     }
+
     private function getTag($tag)
     {
         return static function () use ($tag) {
