@@ -5,23 +5,31 @@ namespace Storyblok\RichtextRender;
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Render;
 
-class RenderTest extends TestCase
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class RenderTest extends TestCase
 {
     public function testEscapeHml()
     {
         $renderer = new Render();
 
-        $this->assertSame('&gt;', $renderer->escapeHTMl('>'));
+        static::assertSame('&gt;', $renderer->escapeHTMl('>'));
     }
 
     /**
      * @dataProvider renderOpeningTagDataProvider
+     *
+     * @param mixed $expected
+     * @param mixed $input
      */
     public function testRenderOpeningTag($expected, $input)
     {
         $renderer = new Render();
 
-        $this->assertEquals($expected, $renderer->renderOpeningTag($input));
+        static::assertSame($expected, $renderer->renderOpeningTag($input));
     }
 
     public function renderOpeningTagDataProvider()
@@ -49,10 +57,10 @@ class RenderTest extends TestCase
                     [
                         'tag' => 'p',
                         'attrs' => [
-                            'class' => 'is-active'
-                        ]
+                            'class' => 'is-active',
+                        ],
                     ],
-                    ['tag' => 'pre']
+                    ['tag' => 'pre'],
                 ],
             ],
         ];
@@ -60,12 +68,15 @@ class RenderTest extends TestCase
 
     /**
      * @dataProvider renderClosingTagDataProvider
+     *
+     * @param mixed $expected
+     * @param mixed $input
      */
     public function testRenderClosingTag($expected, $input)
     {
         $renderer = new Render();
 
-        $this->assertEquals($expected, $renderer->renderClosingTag($input));
+        static::assertSame($expected, $renderer->renderClosingTag($input));
     }
 
     public function renderClosingTagDataProvider()
