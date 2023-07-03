@@ -29,11 +29,11 @@ final class UtilsTest extends TestCase
             'title' => 'An favicon',
         ];
 
-        static::assertSame($expected, Utils::pick($attrs, $allowed));
+        self::assertSame($expected, Utils::pick($attrs, $allowed));
     }
 
     public function testPickEmpty()
     {
-        static::assertNull(Utils::pick([], ['src', 'alt', 'title']));
+        self::assertNull(Utils::pick([], ['src', 'alt', 'title']));
     }
 }

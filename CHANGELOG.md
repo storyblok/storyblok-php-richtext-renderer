@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.2.0 - 2023-06-30
+Release: [v2.2.0](https://github.com/storyblok/storyblok-php-richtext-renderer/releases/tag/2.2.0)
+
+### Added (new features)
+- Now this rendered has support for the following new features (new tags and attributes):
+  - Emojis
+  - Anchor
+  - Text Highlight
+  - Text style
+  - Custom attributes inside links
+  - Subscript
+  - Superscript
+
 ## 2.1.0 - 2023-01-23
 Release: [v2.1.0](https://github.com/storyblok/storyblok-php-richtext-renderer/releases/tag/2.1.0)
 

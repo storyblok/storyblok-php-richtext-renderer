@@ -16,11 +16,11 @@ final class RenderTest extends TestCase
     {
         $renderer = new Render();
 
-        static::assertSame('&gt;', $renderer->escapeHTMl('>'));
+        self::assertSame('&gt;', $renderer->escapeHTMl('>'));
     }
 
     /**
-     * @dataProvider renderOpeningTagDataProvider
+     * @dataProvider provideRenderOpeningTagCases
      *
      * @param mixed $expected
      * @param mixed $input
@@ -29,10 +29,10 @@ final class RenderTest extends TestCase
     {
         $renderer = new Render();
 
-        static::assertSame($expected, $renderer->renderOpeningTag($input));
+        self::assertSame($expected, $renderer->renderOpeningTag($input));
     }
 
-    public function renderOpeningTagDataProvider()
+    public function provideRenderOpeningTagCases()
     {
         return [
             'without argument' => [
@@ -67,7 +67,7 @@ final class RenderTest extends TestCase
     }
 
     /**
-     * @dataProvider renderClosingTagDataProvider
+     * @dataProvider provideRenderClosingTagCases
      *
      * @param mixed $expected
      * @param mixed $input
@@ -76,10 +76,10 @@ final class RenderTest extends TestCase
     {
         $renderer = new Render();
 
-        static::assertSame($expected, $renderer->renderClosingTag($input));
+        self::assertSame($expected, $renderer->renderClosingTag($input));
     }
 
-    public function renderClosingTagDataProvider()
+    public function provideRenderClosingTagCases()
     {
         return [
             'without argument' => [

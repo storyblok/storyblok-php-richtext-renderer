@@ -50,7 +50,7 @@ class Resolver
             foreach ($marksArray as $m) {
                 $mark = $this->getMatchingMark($m);
 
-                if ($mark) {
+                if ($mark && isset($mark['tag'])) {
                     $html[] = $this->renderer->renderOpeningTag($mark['tag']);
                 }
             }
@@ -73,6 +73,8 @@ class Resolver
             $html[] = $this->renderer->renderTag($node['single_tag'], ' /');
         } elseif ($node && \array_key_exists('html', $node)) {
             $html[] = $node['html'];
+        } elseif (\array_key_exists('type', $item) && 'emoji' === $item['type']) {
+            $html[] = $this->renderer->renderEmoji($item);
         }
 
         if ($node && \array_key_exists('tag', $node)) {
@@ -84,7 +86,7 @@ class Resolver
             foreach ($itemReverse as $m) {
                 $mark = $this->getMatchingMark($m);
 
-                if ($mark) {
+                if ($mark && isset($mark['tag'])) {
                     $html[] = $this->renderer->renderClosingTag($mark['tag']);
                 }
             }

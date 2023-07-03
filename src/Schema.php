@@ -17,6 +17,11 @@ class Schema
             'italic' => $this->get_tag('tag', 'i'),
             'link' => $this->get_link('a'),
             'styled' => $this->get_tag_styled('span'),
+            'subscript' => $this->get_tag('tag', 'sub'),
+            'superscript' => $this->get_tag('tag', 'sup'),
+            'highlight' => $this->get_highlight_tag(),
+            'textStyle' => $this->get_colored_text(),
+            'anchor' => $this->get_tag_styled('span'),
         ];
     }
 
@@ -33,6 +38,7 @@ class Schema
             'image' => $this->get_image(),
             'code_block' => $this->get_code_block(),
             'heading' => $this->get_heading('tag'),
+            'emoji' => $this->get_emoji(),
         ];
     }
 
@@ -152,5 +158,70 @@ class Schema
         }
 
         return 1;
+    }
+
+    protected function get_emoji($node = [])
+    {
+        return static function ($node) {
+            $rawAttrs = $node['attrs'];
+            $attrs = [
+                'data-type' => 'emoji',
+                'data-name' => $rawAttrs['name'],
+                'emoji' => $rawAttrs['emoji'],
+            ];
+
+            return [
+                'tag' => [
+                    [
+                        'tag' => 'span',
+                        'attrs' => $attrs,
+                    ],
+                ],
+            ];
+        };
+    }
+
+    protected function get_highlight_tag($node = [])
+    {
+        return static function ($node) {
+            if (!isset($node['attrs']['color']) || empty($node['attrs']['color'])) {
+                return [];
+            }
+
+            $attrs = [
+                'style' => 'background-color:' . $node['attrs']['color'] . ';',
+            ];
+
+            return [
+                'tag' => [
+                    [
+                        'tag' => 'span',
+                        'attrs' => $attrs,
+                    ],
+                ],
+            ];
+        };
+    }
+
+    protected function get_colored_text($node = [])
+    {
+        return static function ($node) {
+            if (!isset($node['attrs']['color']) || empty($node['attrs']['color'])) {
+                return [];
+            }
+
+            $attrs = [
+                'style' => 'color:' . $node['attrs']['color'],
+            ];
+
+            return [
+                'tag' => [
+                    [
+                        'tag' => 'span',
+                        'attrs' => $attrs,
+                    ],
+                ],
+            ];
+        };
     }
 }

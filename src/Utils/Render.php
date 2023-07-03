@@ -59,4 +59,25 @@ class Render
     {
         return $this->renderTag($tags, '');
     }
+
+    public function renderEmoji($item)
+    {
+        if ($item['attrs']['emoji']) {
+            return $item['attrs']['emoji'];
+        }
+
+        $emojiImageContainer = [
+            [
+                'tag' => 'img',
+                'attrs' => [
+                    'src' => $item['attrs']['fallbackImage'],
+                    'draggable' => 'false',
+                    'loading' => 'lazy',
+                    'align' => 'absmiddle',
+                ],
+            ],
+        ];
+
+        return $this->renderTag($emojiImageContainer, ' /');
+    }
 }
