@@ -6,9 +6,8 @@
 
 namespace Storyblok\RichtextRender;
 
-use Storyblok\RichtextRender\Fixtures\ResolverTestData;
-
 use PHPUnit\Framework\TestCase;
+use Storyblok\RichtextRender\Fixtures\ResolverTestData;
 
 /**
  * @internal
@@ -599,20 +598,11 @@ final class ResolverTest extends TestCase
     {
         $resolver = new Resolver();
 
-        $data =  ResolverTestData::textWithBrokenAttrs();
+        $data = ResolverTestData::textWithBrokenAttrs();
 
         $expected = '<p>Text with highlight colors. And another text with text color.</p><p>Text with highlight colors. And another text with text color.</p>';
 
         self::assertSame($expected, $resolver->render((object) $data));
-    }
-
-    private function getTag($tag)
-    {
-        return static function () use ($tag) {
-            return [
-                'tag' => $tag,
-            ];
-        };
     }
 
     public function testTextWithLinksSubscriptsAndSuperscripts()
@@ -646,5 +636,14 @@ final class ResolverTest extends TestCase
         $expected = '<p><a href="https://www.storyblok.com/?foo=bar&amp;bar=foo" target="_self">test</a></p>';
 
         self::assertSame($expected, $resolver->render((object) $data));
+    }
+
+    private function getTag($tag)
+    {
+        return static function () use ($tag) {
+            return [
+                'tag' => $tag,
+            ];
+        };
     }
 }

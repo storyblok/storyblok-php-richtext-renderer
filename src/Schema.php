@@ -3,7 +3,6 @@
 namespace Storyblok\RichtextRender;
 
 use Storyblok\RichtextRender\Utils\Utils;
-use Storyblok\RichtextRender\Utils\Render;
 
 class Schema
 {
