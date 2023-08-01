@@ -643,7 +643,7 @@ final class ResolverTest extends TestCase
 
         $data = ResolverTestData::escapeAmpersandInAttributeValues();
 
-        $expected = '<p><a href="https://www.storyblok.com/?foo=bar&bar=foo" target="_self">test</a></p>';
+        $expected = '<p><a href="https://www.storyblok.com/?foo=bar&amp;bar=foo" target="_self">test</a></p>';
 
         self::assertSame($expected, $resolver->render((object) $data));
     }

@@ -3,6 +3,7 @@
 namespace Storyblok\RichtextRender;
 
 use Storyblok\RichtextRender\Utils\Utils;
+use Storyblok\RichtextRender\Utils\Render;
 
 class Schema
 {
@@ -48,6 +49,8 @@ class Schema
             $attrs = $node['attrs'];
             $linkType = Utils::get($attrs, 'linktype', 'url');
             unset($attrs['linktype']);
+
+            $attrs['href'] = Utils::escapeHTML($attrs['href']);
 
             if (\array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
