@@ -68,7 +68,7 @@ class Resolver
                 $html[] = $this->renderNode($content);
             }
         } elseif (\array_key_exists('text', $item)) {
-            $html[] = $this->renderer->escapeHTML($item['text']);
+            $html[] = Utils::escapeHTML($item['text']);
         } elseif ($node && \array_key_exists('single_tag', $node)) {
             $html[] = $this->renderer->renderTag($node['single_tag'], ' /');
         } elseif ($node && \array_key_exists('html', $node)) {

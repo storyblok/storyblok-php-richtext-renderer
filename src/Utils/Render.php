@@ -4,11 +4,6 @@ namespace Storyblok\RichtextRender\Utils;
 
 class Render
 {
-    public function escapeHTMl($html)
-    {
-        return htmlspecialchars($html, ENT_QUOTES);
-    }
-
     public function renderClosingTag($tags)
     {
         if (\is_string($tags)) {

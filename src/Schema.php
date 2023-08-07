@@ -49,6 +49,8 @@ class Schema
             $linkType = Utils::get($attrs, 'linktype', 'url');
             unset($attrs['linktype']);
 
+            $attrs['href'] = Utils::escapeHTML($attrs['href']);
+
             if (\array_key_exists('anchor', $attrs)) {
                 $anchor = $attrs['anchor'];
 

@@ -26,4 +26,9 @@ class Utils
     {
         return \array_key_exists($key, $obj) ? $obj[$key] : $default;
     }
+
+    public static function escapeHTMl($html)
+    {
+        return htmlspecialchars($html, ENT_QUOTES);
+    }
 }

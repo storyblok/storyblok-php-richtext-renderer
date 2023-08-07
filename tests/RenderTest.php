@@ -4,6 +4,7 @@ namespace Storyblok\RichtextRender;
 
 use PHPUnit\Framework\TestCase;
 use Storyblok\RichtextRender\Utils\Render;
+use Storyblok\RichtextRender\Utils\Utils;
 
 /**
  * @internal
@@ -14,9 +15,7 @@ final class RenderTest extends TestCase
 {
     public function testEscapeHml()
     {
-        $renderer = new Render();
-
-        self::assertSame('&gt;', $renderer->escapeHTMl('>'));
+        self::assertSame('&gt;', Utils::escapeHTMl('>'));
     }
 
     /**
@@ -32,7 +31,7 @@ final class RenderTest extends TestCase
         self::assertSame($expected, $renderer->renderOpeningTag($input));
     }
 
-    public function provideRenderOpeningTagCases()
+    public function provideRenderOpeningTagCases(): iterable
     {
         return [
             'without argument' => [
@@ -79,7 +78,7 @@ final class RenderTest extends TestCase
         self::assertSame($expected, $renderer->renderClosingTag($input));
     }
 
-    public function provideRenderClosingTagCases()
+    public function provideRenderClosingTagCases(): iterable
     {
         return [
             'without argument' => [
