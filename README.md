@@ -56,6 +56,55 @@ $data = [
 
 $resolver->render($data) # renders a html string: '<hr />'
 ```
+### Optimizing images
+
+You can instruct the richtext resolver to optimize images using [Storyblok Image Service](https://www.storyblok.com/docs/image-service)
+passing the option `optimizeImages => true`.
+
+**Example**
+
+```php
+$resolver->render($data, ['optimizeImages' => true])
+```
+
+Also, it is possible to customize this option passing an array.
+All properties are optional and will be applied to each image (hosted in Storyblok) in the field. External images will be ignored.
+
+**Example**
+
+```php
+$options = [ 
+  'optimizeImages' => [
+    'class' => 'w-full my-8 border-b border-black',
+    'width' => 640, // image width
+    'height' => 360, // image height
+    'loading' => 'lazy', // 'lazy' | 'eager'
+    'filters' => [
+      'blur' => 0, // 0 to 100
+      'brightness' => 0, // -100 to 100
+      'fill' => 'transparent', // Or any hexadecimal value like FFCC99
+      'format' => 'webp', // 'webp' | 'jpeg' | 'png'
+      'grayscale' => false,
+      'quality' => 95, // 0 to 100
+      'rotate' => 0 // 0 | 90 | 180 | 270
+    ],
+    // srcset accepts an array with image widths. 
+    // Example: [720, 1024, 1533] 
+    // will render srcset="//../m/720x0 720w", "//../m/1024x0 1024w", "//../m/1533x0 1280w"
+    // Also accept an array to pass width and height. 
+    // Example: [[720,500], 1024, [1500, 1000]] 
+    // will render srcset="//../m/720x500 720w", "//../m/1024x0 1024w", "//../m/1280x0 1280w"
+    'srcset' => [720, 1024, 1533], 
+    'sizes' => [
+      '(max-width: 767px) 100vw',
+      '(max-width: 1024px) 768px',
+      '1500px'
+    ]
+  ]
+]
+
+$resolver->render($data, ['optimizeImages' => $options])
+```
 
 ### How to define a custom schema for resolver?
 
