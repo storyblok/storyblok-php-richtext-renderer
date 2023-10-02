@@ -8,3 +8,5 @@ coverage/
 .DS_Store
 .AppleDouble
 .LSOverride
+.idea
+.php-cs-fixer.cache

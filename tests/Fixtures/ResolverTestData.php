@@ -1418,4 +1418,21 @@ class ResolverTestData
             ],
         ];
     }
+
+    public static function imageStoredAtStoryblokAssets()
+    {
+        return [
+            'type' => 'doc',
+            'content' => [
+                [
+                    'type' => 'image',
+                    'attrs' => [
+                        'src' => 'https://a.storyblok.com/f/000000/00a00a00a0/image-name.png',
+                        'name' => 'Text image',
+                        'alt' => 'Alt text',
+                    ],
+                ],
+            ],
+        ];
+    }
 }
