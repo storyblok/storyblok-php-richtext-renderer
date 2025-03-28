@@ -3,6 +3,7 @@
     "type": "library",
     "license": "MIT",
     "description": "A package allowing you to get an HTML string from the richtext field of Storyblok.",
+    "abandoned": "storyblok/php-tiptap-extension",
     "keywords": ["storyblok", "richtext", "text", "html", "render"],
     "authors": [
         {
