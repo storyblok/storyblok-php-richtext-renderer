@@ -1,4 +1,8 @@
-# Storyblok PHP Richtext Renderer
+> [!WARNING]  
+> This package is discontinued and will only receive critical security updates.\
+> Please use the new official [Tiptap Extension](https://github.com/storyblok/php-tiptap-extension).
+
+# Storyblok PHP Richtext Renderer - Deprecated
 
 This package allows you to get an HTML string from the [richtext field](https://www.storyblok.com/docs/richtext-field) of Storyblok.
 
